@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Barang;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('barang');
 });
+
+// Route::get('/', [BarangController::class,'index']);
