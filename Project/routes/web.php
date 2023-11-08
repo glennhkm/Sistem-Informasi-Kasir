@@ -16,7 +16,7 @@ use App\Http\Controllers\BarangController;
 */
 
 Route::get('/', function () {
-    return view('barang');
+    return view('welcome');
 });
 
 // Route::get('/', [BarangController::class,'index']);
