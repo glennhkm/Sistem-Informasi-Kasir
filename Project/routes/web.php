@@ -2,6 +2,7 @@
 
 use App\Models\Barang;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 
 /*
@@ -15,8 +16,9 @@ use App\Http\Controllers\BarangController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+
+Route::view('/', 'welcome')->middleware('auth');
 // Route::get('/', [BarangController::class,'index']);
+Route::get('/login', [AuthController::class,'login'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class,'authenticate']);

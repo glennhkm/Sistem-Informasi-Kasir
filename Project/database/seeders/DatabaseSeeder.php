@@ -14,11 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Barang::create([
-            'nama_barang' => 'sepatu nike',
-            'harga' => '500000',
-            'stok' => 20,
-            'diskon' => 0.2
-        ]);
+        
     }
 }
