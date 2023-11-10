@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Barang;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,26 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
 
-Route::get('/main', function () {
-    return view('main');
-});
 
-Route::get('/transaksi', function () {
-    return view('transaksi');
-});
 
-Route::get('/barang', function () {
-    return view('barang');
-});
+// Route::view('/', 'welcome')->middleware('auth');
+Route::view('/kasir', 'main')->middleware('auth');
+Route::view('/transaksi', 'transaksi')->middleware('auth');
+Route::view('/barang', 'barang')->middleware('auth');
+// Route::get('/', [BarangController::class,'index']);
+Route::get('/', [AuthController::class,'login'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class,'authenticate']);
 
-Route::get('/editpembelian', function () {
-    return view('editPembelian');
-});
-
-Route::get('/tambahbarang', function () {
-    return view('tambahBarang');
-});

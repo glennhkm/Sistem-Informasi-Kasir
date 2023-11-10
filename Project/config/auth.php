@@ -61,8 +61,8 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'driver' => 'custom',
+            'model' => App\Models\Karyawan::class,
         ],
 
         // 'users' => [
@@ -89,6 +89,7 @@ return [
     | quickly generating a very large amount of password reset tokens.
     |
     */
+
 
     'passwords' => [
         'users' => [
