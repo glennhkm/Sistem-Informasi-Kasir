@@ -18,7 +18,12 @@ use App\Http\Controllers\BarangController;
 
 
 
-Route::view('/', 'welcome')->middleware('auth');
+
+// Route::view('/', 'welcome')->middleware('auth');
+Route::view('/kasir', 'main')->middleware('auth');
+Route::view('/transaksi', 'transaksi')->middleware('auth');
+Route::view('/barang', 'barang')->middleware('auth');
 // Route::get('/', [BarangController::class,'index']);
-Route::get('/login', [AuthController::class,'login'])->name('login')->middleware('guest');
+Route::get('/', [AuthController::class,'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class,'authenticate']);
+

@@ -1,0 +1,8 @@
+div button.ubah-warna img.gambar{
+    transition-duration: 0.4s;
+}
+
+
+div button.ubah-warna:hover img.gambar{
+    filter: invert(100%);
+}
