@@ -16,12 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Barang::create([
-        //     'nama_barang' => 'Meja',
-        //     'harga'=> 9200,
-        //     'stok' => 2,
-        //     'diskon' => 80
-        // ]);
+        Karyawan::create([
+            'username' => 'kelompokhore',
+            'password' => bcrypt('kelompokhore')
+            
+        ]);
         // Barang::create([
         //     'nama_barang' => 'Kursi',
         //     'harga'=> 124500,
@@ -61,13 +60,13 @@ class DatabaseSeeder extends Seeder
         //     'pajak' => 0,
         // ]);
 
-        Transaksi::create([
-            'id_barang' => 9,
-            'jumlah_barang' => 5,
-            // 'sub_total' => 0,
-            // 'harga_total' => 0,
-            // 'pajak' => 0.1,
-        ]);
+        // Transaksi::create([
+        //     'id_barang' => 9,
+        //     'jumlah_barang' => 5,
+        //     // 'sub_total' => 0,
+        //     // 'harga_total' => 0,
+        //     // 'pajak' => 0.1,
+        // ]);
 
         // Karyawan::create([
         //     'username' => 'kelompokhore',
