@@ -4,7 +4,7 @@
 @section('body')
 
     {{-- Start Dropdown Data dan Waktu --}}
-    <div class=" h-[66px] font-poppins mt-[20px] clear-both">
+    <div class=" h-[66px] font-poppins mt-[20px] ml-3 clear-both">
         {{-- Start Data --}}
         <div class=" inline-block float-left ml-[38px]">
             <p class=" font-bold text-[20px] mb-[10px]">Data Transaksi</p>
@@ -42,199 +42,48 @@
     {{-- End of Data dan Waktu --}}
 
     {{-- Start Tabel Transaksi --}}
-    <div class=" w-[94%] h-[430px] ml-[38px] mt-[30px] font-poppins overflow-scroll">
+    <div class=" w-[94%] h-[430px] mx-auto mt-[30px] font-poppins overflow-scroll">
         <table class=" w-full text-center">
             <thead class="bg-[#C02126]  text-white sticky top-[0px] font-semibold">
                 <tr>
-                    <td class="border border-black">ID Transaksi</td>
-                    <td class="border border-black">ID Pegawai
+                    <td class="border border-black py-3">ID Transaksi</td>
                     <td class="border border-black">ID Barang</td>
                     <td class="border border-black">Nama Barang</td>
-                    <td class="border border-black">Qyt</td>
+                    <td class="border border-black">Qty</td>
                     <td class="border border-black"><h1>Harga</h1><p class=" text-[10px]">(harga-(harga * dics))+(harga diskon * pajak)</p></td>
                     <td class="border border-black">Tanggal</td>
                 </tr>
             </thead>
             <tbody>
+                @foreach ($transaksi as $item)
                 <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
+                    <td class="border border-black h-10">{{$item->id}}</td>
+                    <td class="border border-black">{{$item->id_barang}}</td>
+                    <td class="border border-black">{{ucwords($item->barang->nama_barang)}}</</td>
+                    <td class="border border-black">{{$item->jumlah_barang}}</</td>
+                    <td class="border border-black">Rp {{number_format($item->harga_total, 0, ',', '.')}}</</td>
+                    <td class="border border-black">{{$item->created_at}}</</td>
+                    {{-- <td class="border border-black"></td> --}} 
+                </tr>
+                @endforeach
+                @for ($i = count($transaksi); $i < 20; $i++)
+                <tr class="h-[25px]">
+                    <td class="border border-black h-10"></td>
                     <td class="border border-black"></td>
                     <td class="border border-black"></td>
                     <td class="border border-black"></td>
                     <td class="border border-black"></td>
                     <td class="border border-black"></td>
                 </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                <tr class="h-[25px]">
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
+                @endfor
             </tbody>
         </table>
     </div>
     {{-- End of Tabel Transaksi  --}}
 
     {{-- Start footer --}}
-    <div class=" h-[80px] ml-[38px] mt-[24px]">
-        <a href="/main">
+    <div class=" h-[80px] ml-12 mt-[24px]">
+        <a href="/">
             <button class=" hover:scale-[1.05] duration-[0.4s]">
                     <img src="{{url('assets/img/logout.png')}}" alt="logout" class=" w-[56px] inline-block">
                     <p class=" inline-block text-[32px] font-bold align-middle">BACK</p>

@@ -21,7 +21,7 @@
                         <div>
                             <label for="Username" class="block text-sm font-medium leading-6 text-gray-900"></label>
                             <div class="mt-2 px-2 border-b-2 border-black">
-                                <img src="\build\assets\img\asu.png" alt="" class=" inline-block w-[15px] mr-1 mb-1">
+                                <img src="\assets\img\username.png" alt="" class=" inline-block w-[15px] mr-1 mb-1">
                                 <input id="username" name="username" placeholder="Username" type="username" autocomplete="off" required required oninvalid="this.setCustomValidity('Username tidak boleh kosong!')" oninput="this.setCustomValidity('')"  class=" inline-block w-[80%] py-1 text-gray-900  focus:outline-none sm:text-sm sm:leading-6" value="{{ old('username') }}">
                             </div>
                         </div>
@@ -31,7 +31,7 @@
                                 <label for="password" class="block text-sm font-medium leading-6 text-gray-900"></label>
                             </div>
                             <div class=" flex gap-[9.5px] mt-2 pl-2 pr-[0.4rem] py-1 border-b-2 border-black">
-                                <img src="\build\assets\img\pass.png" alt="" class="w-4 h-5">
+                                <img src="\assets\img\password.png" alt="" class="w-4 h-5">
                                 <input id="password" placeholder="Password" name="password" type="password" autocomplete="off" required oninvalid="this.setCustomValidity('Password tidak boleh kosong!')" oninput="this.setCustomValidity('')" class="w-full text-gray-900 border-black focus:outline-none sm:text-sm sm:leading-6" value="{{ old('password') }}">                                  
                                 <button type="button" id="togglePassword">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mt-0.5 text-black hover:text-red-800" id="eye-icon">

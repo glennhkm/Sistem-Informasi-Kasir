@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_barang');
             $table->unsignedBigInteger('id_karyawan');
-            $table->unsignedInteger('sub_total');
-            $table->unsignedInteger('harga_total');
-            $table->decimal('pajak');
+            $table->unsignedInteger('sub_total')->nullable();
+            $table->unsignedInteger('harga_total')->nullable();
+            $table->decimal('pajak')->nullable();
             $table->timestamps();
             $table->foreign('id_barang')->references('id')->on('barang');
             $table->foreign('id_karyawan')->references('id')->on('karyawan');

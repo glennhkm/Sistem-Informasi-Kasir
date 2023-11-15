@@ -4,6 +4,7 @@ use App\Models\Barang;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +21,16 @@ use App\Http\Controllers\BarangController;
 
 
 // Route::view('/', 'welcome')->middleware('auth');
-Route::view('/kasir', 'main')->middleware('auth');
-Route::view('/transaksi', 'transaksi')->middleware('auth');
-Route::view('/barang', 'barang')->middleware('auth');
+// Route::view('/', 'main')->middleware('auth');
+// Route::view('/', 'main')->middleware('auth');
+// Route::view('/transaksi', 'transaksi')->middleware('auth');
 // Route::get('/', [BarangController::class,'index']);
-Route::get('/', [AuthController::class,'login'])->name('login')->middleware('guest');
+Route::get('/login', [AuthController::class,'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class,'authenticate']);
-
+Route::resource('/barang', BarangController::class)->middleware('auth');
+Route::get('/transaksi', [TransaksiController::class, 'halamanTransaksi'])->middleware('auth');
+Route::get('/', [TransaksiController::class, 'halamanMain'])->middleware('auth');
+// Route::post('/transactions', [TransaksiController::class, 'storeTransaction']);
+Route::post('/transactions', [TransaksiController::class, 'storeTransaction'])->withoutMiddleware(VerifyCsrfToken::class);
+Route::get('/search-barang', [BarangController::class, 'search'])->name('search.barang');
+Route::post('/transaksi', [TransaksiController::class, 'storeTransaksi']);
