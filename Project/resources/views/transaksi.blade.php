@@ -58,8 +58,8 @@
                 @foreach ($transaksi as $item)
                 <tr class="h-[25px]">
                     <td class="border border-black h-10">{{$item->id}}</td>
-                    <td class="border border-black">{{$item->id_barang}}</td>
-                    <td class="border border-black">{{ucwords($item->barang->nama_barang)}}</</td>
+                    <td class="border border-black">{{$item->kode_barang}}</td>
+                    <td class="border border-black">{{ucwords($item->nama_barang)}}</</td>
                     <td class="border border-black">{{$item->jumlah_barang}}</</td>
                     <td class="border border-black">Rp {{number_format($item->harga_total, 0, ',', '.')}}</</td>
                     <td class="border border-black">{{$item->created_at}}</</td>
