@@ -12,12 +12,12 @@ class Transaksi extends Model
 
     protected $table = 'transaksi';
 
-    
-    
-    
     protected $fillable = [
         'id_barang',
+        'kode_barang',
+        'nama_barang',
         'jumlah_barang',
+        'sub_total',
         'pajak',
         'harga_total',
     ];
@@ -32,40 +32,37 @@ class Transaksi extends Model
         return Carbon::parse($value)->translatedFormat('l, d F Y H:i:s');
     }
 
-    public function getSubTotalAttribute(){
+    // public function getSubTotalAttribute(){
         
-        $sub_total = $this->barang->hargaSetelahDiskon() * $this->jumlah_barang;
+    //     $sub_total = $this->barang->hargaSetelahDiskon() * $this->jumlah_barang;
 
-        return $sub_total;
-    }
+    //     return $sub_total;
+    // }
 
-    public function totalSubTotal() 
-    {
-      return $this->get()->sum('sub_total');
-    }
+    // public function totalSubTotal() 
+    // {
+    //   return $this->get()->sum('sub_total');
+    // }
 
     public function barang()
     {
       return $this->belongsTo(Barang::class, 'id_barang');
     }
 
-    public function getPajakAttribute(){
-        return 0.1;
-    }
 
-    public function hitungTotal()
-    {
-        if($this->barang) {
-            return $this->sub_total - ($this->sub_total * $this->pajak);
-        } else {
-            return 0;
-        }
-    }
+    // public function hitungTotal()
+    // {
+    //     if($this->barang) {
+    //         return $this->sub_total - ($this->sub_total * $this->pajak);
+    //     } else {
+    //         return 0;
+    //     }
+    // }
 
-    public function getHargaTotalAttribute()
-  { 
-    return $this->hitungTotal();
-  }
+//     public function getHargaTotalAttribute()
+//   { 
+//     return $this->hitungTotal();
+//   }
 
     public static function boot() 
     {

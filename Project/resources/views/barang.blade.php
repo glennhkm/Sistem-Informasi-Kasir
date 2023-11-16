@@ -2,15 +2,17 @@
 @section('title','Tabel Barang')
     
 @section('body')
+<div class="overflow-hidden h-[88vh] w-screen">
     {{-- Start Data Barang dan Tambah Barang --}}
-    <div class="relative h-[66px] font-poppins mt-[20px] mx-12   flex items-center justify-center">
+    <div class="relative h-[8vh] font-poppins mt-[2vh] mx-[2.3vw] flex items-center justify-center">
         {{-- Data Barang --}}
         <div class=" inline-block float-left">
-            <p class=" font-bold text-[20px] mb-[10px]">Data Barang</p>
+            <p class=" font-bold text-[2.5vh] mb-[1vh]">Data Barang</p>
 
-            <div class=" font-medium inline-block border border-black rounded bg-[#D9D9D9]">
-                <p class=" inline-block px-[8px] border-r-[1px] border-black">show</p>
-                <select name="" id="" class=" rounded bg-[#D9D9D9]">
+            <div class=" font-medium inline-block w-[9vw] h-[4vh] border-[0.1vh] border-black rounded-[0.7vh] bg-[#D9D9D9]">
+                <p class=" inline-block px-[0.4vw] py-[0.01vw] border-r-[0.1vh] text-[2.5vh] w-[5vw] h-full border-black">show</p>
+                <select id="jumlahBarang" onchange="updateJumlahBarang()" class=" bg-[#D9D9D9] focus:outline-none appearance-none box-border py-[0.01vh] px-[0.01vw] text-center text-[2.5vh] w-[3vw] h-[3.5vh] cursor-pointer">
+                    <option value="0">All</option>
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
@@ -28,59 +30,29 @@
         </div>
         @endif
         {{-- Start Tambah Barang --}}
-        <div class=" ml-auto font-semibold text-sm pl-1 text-white mt-[20px]">
-            <button onclick="showModal('modal-add')" class=" h-[38px] px-4 rounded-md bg-[#C16F1D] hover:scale-[1.1] duration-300">+ Tambah Barang</button>
+        <div class=" ml-auto font-semibold text-[1.8vh] text-white mt-[2vh]">
+            <button onclick="showModal('modal-add')" class=" h-[5.5vh] px-[0.8vw] rounded-[0.9vh] bg-[#C16F1D] hover:scale-[1.1] duration-300">+ Tambah Barang</button>
         </div>
         {{-- End of Tambah Barang --}}
     </div>
     {{-- End of Data Barang dan Tambah Barang --}}
 
     {{-- Start Tabel Barang --}}
-    <div class=" w-[94%] h-[430px] mx-auto mt-[30px] font-poppins overflow-scroll">
+    <div class=" w-[95.7%] h-[58vh] mx-auto mt-[5vh] font-poppins overflow-scroll">
         <table class=" w-full text-center">
-            <thead class="bg-[#C02126]  text-white sticky top-[0px] font-semibold">
-                <tr>
-                    <td class="border border-black py-2">No</td>
-                    <td class="border border-black">Kode Barang</td>
-                    <td class="border border-black">Nama Barang</td>
-                    <td class="border border-black">Stok</td>
-                    <td class="border border-black">Harga</td>
-                    <td class="border border-black">Disc%</td>
-                    <td class="border border-black">Action</td>
+            <thead class="bg-[#C02126]  text-white sticky top-[0px] font-semibold text-[2vh]">
+                <tr class="h-[5vh]">
+                    <td class="border-[0.1vh] border-black w-[3.7vw]">No</td>
+                    <td class="border-[0.1vh] border-black w-[9vw]">Kode Barang</td>
+                    <td class="border-[0.1vh] border-black w-[30vw]">Nama Barang</td>
+                    <td class="border-[0.1vh] border-black w-[4vw]">Qyt</td>
+                    <td class="border-[0.1vh] border-black w-[15vw]">Harga</td>
+                    <td class="border-[0.1vh] border-black w-[8vw]">Disc%</td>
+                    <td class="border-[0.1vh] border-black w-[20vw]">Action</td>
                 </tr>
             </thead>
-            <tbody>
-                @foreach ($barang as $item)   
-                <tr class="h-[25px]">
-                    <td class="border border-black h-10">{{$loop->iteration}}</td>
-                    <td class="border border-black">{{$item->id}}</td>
-                    <td class="border border-black">{{ ucwords($item->nama_barang) }}</td>
-                    <td class="border border-black">{{$item->stok}}</td>
-                    <td class="border border-black">Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
-                    <td class="border border-black">{{$item->diskon*1}}%</td>
-                    <td class="border border-black">
-                        <div class="flex justify-center gap-2 text-sm text-white">
-                            <button onclick="setSelectedBarangId({{$item->id}}, '{{$item->nama_barang}}', {{$item->stok}}, {{$item->harga}}, '{{$item->diskon}}', 'edit-modal')" class="rounded-md bg-[#C16F1D] hover:scale-110 duration-300 w-16 py-1">
-                                Edit 
-                            </button>
-                            <button onclick="setSelectedBarangId({{$item->id}}, '{{$item->nama_barang}}', {{$item->stok}}, {{$item->harga}}, '{{$item->diskon}}', 'delete-modal')" type="submit" class="w-16 rounded-md bg-red-800 hover:scale-110 duration-300">
-                                Hapus
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-                @for($i = count($barang); $i < 20; $i++)
-                <tr class="h-[25px]">
-                    <td class="border border-black h-10"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                    <td class="border border-black"></td>
-                </tr>
-                @endfor
+            <tbody id="bodyTable" class=" text-[1.9vh]">
+                @include('partial')
                 
             </tbody>
         </table>
@@ -144,14 +116,14 @@
     </div>
     
     {{-- Form validasi tombol delete barang --}}
-    <div class="w-screen h-screen fixed top-0 left-0 opacity-0 hidden transition-opacity duration-500 justify-center font-poppins items-center bg-black bg-opacity-30" id="delete-modal"> 
-        <div class="bg-white rounded-md w-auto px-8 py-5 h-auto flex flex-col gap-4 items-center justify-center">
+    <div class="bg-black fixed top-0 left-0 font-poppins opacity-0 hidden transition-opacity h-screen w-screen bg-opacity-50 justify-center items-center" id="delete-modal">
+        <div class=" bg-white rounded-md flex flex-col gap-3 justify-center items-center py-4 px-10">
             Apakah anda yakin ingin menghapus?
-            <form id="delete-form" class="text-sm flex text-white gap-2" method="POST">
+            <form id="delete-form" class="text-sm flex text-white gap-3" method="POST">
                 @csrf
                 @method('DELETE')
-                <span onclick="hideModal('delete-modal')" class="bg-red-800 w-16 hover:scale-110 duration-300 text-center py-1 rounded-md cursor-pointer">Tidak</span>
-                <button class="bg-blue-600 w-16 text-center py-1 rounded-md hover:scale-110 duration-300" type="button" onclick="confirmForm('delete-form')">Ya</button>
+                <button class="bg-blue-600 w-20 text-center py-1 rounded-md hover:scale-110 duration-300" type="button" onclick="confirmForm('delete-form')">Ya</button>
+                <span onclick="hideModal('delete-modal')" class="bg-red-800 w-20 hover:scale-110 duration-300 text-center py-1 rounded-md cursor-pointer">Tidak</span>
             </form>
         </div>
     </div>
@@ -159,28 +131,47 @@
     {{-- End of Tabel Barang  --}}
 
     {{-- Start Footer --}}
-    <div class=" h-[80px] ml-[38px] mt-[28px]">
+    <div class=" h-[15vh] ml-[4vh] mt-[2.6vh]">
         <a href="/">
             <button class=" hover:scale-[1.05] duration-[0.4s]">
-                    <img src="{{url('assets/img/logout.png')}}" alt="logout" class=" w-[56px] inline-block">
-                    <p class=" inline-block text-[32px] font-bold align-middle">BACK</p>
+                    <img src="{{url('assets/img/logout.png')}}" alt="logout" class=" w-[3vw] inline-block">
+                    <p class=" inline-block text-[5vh] ml-[0.5vh] font-bold align-middle">BACK</p>
             </button>
         </a>
     </div>
     {{-- End of Footer --}}
-
+</div>
     {{-- Overlay Untuk page Tambah Barang --}}
     {{-- <div id="overlayBarang">
         <div id="overlayBarangContent" class=" transition-opacity">
 
         </div>
-    </div>
+    </div>s
     {{--End of Overlay  --}}
     {{-- <script src="{{asset('src/barang.js')}}"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         let selectedBarangId;
 
-    function setSelectedBarangId(id, nama_barang, stok, harga, diskon, idModal) {
+
+    function updateJumlahBarang() {
+        var jumlahBarang = document.getElementById('jumlahBarang').value;
+        // Lakukan permintaan AJAX ke server
+        $.ajax({
+            url: '/update-jumlah-barang',
+            method: 'GET',
+            data: { jumlahBarang: jumlahBarang },
+            success: function(response) {
+                // Tangani respons dan perbarui bagian yang sesuai dari halaman
+                document.getElementById('bodyTable').innerHTML = response;
+            },
+            error: function(error) {
+                console.error('Gagal mengambil data: ', error);
+            }
+        });
+    }   
+
+    function setSelectedBarangId(id, idModal, nama_barang = 0, stok = 0, harga = 0, diskon = 0) {
         selectedBarangId = id;
 
         document.getElementById('nama_barang_edit').value = nama_barang;

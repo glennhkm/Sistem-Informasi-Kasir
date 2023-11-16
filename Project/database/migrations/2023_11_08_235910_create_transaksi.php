@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_barang');
-            $table->unsignedBigInteger('id_karyawan');
+            $table->unsignedBigInteger('id_barang')->nullable();
+            $table->unsignedBigInteger('kode_barang')->nullable();
+            $table->string('nama_barang')->nullable();
+            $table->integer('jumlah_barang');
             $table->unsignedInteger('sub_total')->nullable();
             $table->unsignedInteger('harga_total')->nullable();
             $table->decimal('pajak')->nullable();
             $table->timestamps();
-            $table->foreign('id_barang')->references('id')->on('barang');
-            $table->foreign('id_karyawan')->references('id')->on('karyawan');
+            $table->foreign('id_barang')->references('id')->on('barang')->onDelete('set null');
         });
     }
 
@@ -31,9 +32,7 @@ return new class extends Migration
     {
         Schema::table('transaksi', function (Blueprint $table) {
             $table->dropForeign(['id_barang']);
-            $table->dropColumn('id_barang');
-            $table->dropForeign(['id_karyawan']);
-            $table->dropColumn('id_karyawan');
+            // $table->dropColumn('id_barang');
             
         });
         Schema::dropIfExists('transaksi');
