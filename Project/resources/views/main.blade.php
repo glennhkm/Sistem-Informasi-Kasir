@@ -95,7 +95,7 @@
         <div class=" font-poppins clear-both text-right w-screen mt-[3.2%] h-[12.5vh] box-border ">
             <div class="inline-block h-[7vh] float-left ml-[2.1vw] mt-[2vh]">
                 <button class=" hover:scale-[1.05] active:scale-[1] duration-[0.4s]">
-                    <a href="/">
+                    <a href="/logout">
                         <img src="{{url('assets/img/logout.png')}}" alt="logout" class=" w-[4vw] inline-block">
                         <p class=" inline-block text-[4vh] ml-[0.2vw] font-bold align-middle">LOGOUT</p>
                     </a>
@@ -130,8 +130,6 @@
             <p class="text-center font-bold tracking-wide text-xl text-green-600">Pembayaran berhasil!</p>
         </div>
     </div>
-    
-    
     
     <script>
         const searchInput = document.getElementById('searchInput');
