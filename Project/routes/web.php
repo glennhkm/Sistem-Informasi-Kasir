@@ -25,7 +25,6 @@ Route::resource('/barang', BarangController::class)->middleware('auth');
 Route::get('/update-jumlah-barang', [BarangController::class, 'updateJumlahBarang']);
 Route::get('/transaksi', [TransaksiController::class, 'halamanTransaksi'])->middleware('auth');
 Route::get('/', [TransaksiController::class, 'halamanMain'])->middleware('auth');
-Route::post('/transactions', [TransaksiController::class, 'storeTransaction'])->withoutMiddleware(VerifyCsrfToken::class);
 Route::get('/search-barang', [BarangController::class, 'search'])->name('search.barang');
 Route::post('/transaksi', [TransaksiController::class, 'storeTransaksi']);
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');

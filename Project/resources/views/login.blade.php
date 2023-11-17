@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
     <title>Login</title>
+    <link rel="icon" href="{{ url('assets/img/horemart.png')}}" type="image/icon">
 </head>
 <body>
     

@@ -37,7 +37,7 @@
         {{-- Start Tabel --}}
         <div class="w-[72%]  h-full mt-[3.4vh] float-left ml-[2.1vw] overflow-scroll">
             <table cellpadding="0" cellspacing="0" id="cartTable" class="w-full text-center text-[1.8vh]">    
-                <thead class="bg-[#C02126] text-white font-semibold">
+                <thead class="bg-[#C02126] text-white font-semibold sticky top-0">
                     <tr class="h-[5vh]">
                         <td class="border-[0.1vh] border-black w-[3.3vw]">No</td>
                         <td class="border-[0.1vh] border-black w-[7vw]">Kode Barang</td>
@@ -130,6 +130,17 @@
             <p class="text-center font-bold tracking-wide text-xl text-green-600">Pembayaran berhasil!</p>
         </div>
     </div>
+
+    @if(session('status'))
+    <div class="bg-black bg-opacity-30 fixed top-0 left-0 hidden duration-300 opacity-0 h-screen w-screen justify-center font-poppins" id="udahLoginModal">
+        <div class="text-black font-bold tracking-wide text-2xl bg-white h-32 px-16 gap-3 rounded-md transition-transform duration-700 ease-out transform flex flex-col items-center justify-center" id="udahLoginForm">
+            {{ session('status') }}
+            <button id="okeUdahLogin" onclick="hideModal('udahLoginModal')" class="bg-green-500 text-white font-normal text-base py-1 rounded-md mx-auto tracking-wider w-20 hover:scale-110 duration-300">
+                OK
+            </button>
+        </div>
+    </div>
+    @endif
     
     <script>
         const searchInput = document.getElementById('searchInput');
@@ -304,7 +315,7 @@ cart.forEach((item, index) => {
                                                                 Apakah anda yakin ingin menghapus?
                                                                 <div class="text-white text-sm flex gap-3 ">
                                                                     <button id="tombolYa" class=" bg-blue-600 w-20 rounded-md hover:scale-110 duration-300 hapus-btn">Ya</button>
-                                                                    <button onclick="hideModal()" class=" bg-red-800 w-20 rounded-md py-1 hover:scale-110 duration-300">Tidak</button>
+                                                                    <button onclick="hideModal('hapusButton')" class=" bg-red-800 w-20 rounded-md py-1 hover:scale-110 duration-300">Tidak</button>
                                                                 </div>
                                                             </div>
                                                         </div>`;
@@ -321,7 +332,7 @@ cart.forEach((item, index) => {
                                                                 Apakah anda yakin ingin menghapus?
                                                                 <div class="text-white text-sm flex gap-3 ">
                                                                     <button id="tombolYa" class=" bg-blue-600 w-20 rounded-md hover:scale-110 duration-300 hapus-btn">Ya</button>
-                                                                    <button onclick="hideModal()" class=" bg-red-800 w-20 rounded-md py-1 hover:scale-110 duration-300">Tidak</button>
+                                                                    <button onclick="hideModal('hapusButton')" class=" bg-red-800 w-20 rounded-md py-1 hover:scale-110 duration-300">Tidak</button>
                                                                 </div>
                                                             </div>
                                                         </div>`;
@@ -365,6 +376,10 @@ cart.forEach((item, index) => {
    cartBody.appendChild(emptyRow);
  }
 }
+function selectedId(id){
+    idHapus = id;
+    showModal(idHapus);
+}
 
 function showModal(id) {
    let modal = document.getElementById('hapusButton');
@@ -375,22 +390,22 @@ function showModal(id) {
    modal.classList.add('flex');
    setTimeout(() => {
        modal.classList.add('opacity-100');
-   }, 20);
+    }, 20);
 }
 
-function hideModal() {
-let modal = document.getElementById('hapusButton');
-modal.classList.remove('opacity-100');
-setTimeout(() => {
-    modal.classList.remove('flex');
-    modal.classList.add('hidden');
+function hideModal(idButton) {
+    let modal = document.getElementById(idButton);
+    modal.classList.remove('opacity-100');
+    if(idButton == 'udahLoginModal'){
+        document.getElementById('udahLoginForm').classList.add('ease-in-out');
+        document.getElementById('udahLoginForm').classList.remove('translate-y-20');
+    }
+    setTimeout(() => {
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
 }, 500);
 }
 
-function selectedId(id){
-    idHapus = id;
-    showModal(idHapus);
-}
 
 // event listeners
 searchInput.addEventListener('select', e => addToCart(e.target));
@@ -476,7 +491,7 @@ barangs.forEach((barang, index) => {
     const li = document.createElement('li');
     li.innerText = ucwords(barang.nama_barang);
     
-    li.classList.add('w-full','py-3', 'pl-4', 'hover:bg-[#D9D9D9]', 'hover:scale-[1.01]', 'duration-300', 'cursor-pointer');
+    li.classList.add('w-full','py-3', 'pl-4', 'hover:bg-[#D9D9D9]', 'hover:scale-[1.01]', 'duration-300', 'cursor-pointer', 'relative', 'z-[1000]', 'bg-white');
     
     if(index < barangs.length - 1){
         li.classList.add('border-b-2', 'border-black');
@@ -570,5 +585,12 @@ else{
 
 
 });
+
+document.getElementById('udahLoginModal').classList.remove('hidden');
+document.getElementById('udahLoginModal').classList.add('flex');
+setTimeout(function () {
+    document.getElementById('udahLoginForm').classList.add('translate-y-20');
+    document.getElementById('udahLoginModal').classList.add('opacity-100');
+     }, 50);
     </script>
 @endsection

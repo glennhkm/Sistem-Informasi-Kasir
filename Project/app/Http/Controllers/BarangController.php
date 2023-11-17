@@ -34,12 +34,7 @@ class BarangController extends Controller
     public function updateJumlahBarang(Request $request)
     {
         $jumlahBarang = $request->input('jumlahBarang');
-        if($jumlahBarang == 0){
-            $barang = Barang::all();
-        }
-        else{
-            $barang = Barang::take($jumlahBarang)->get();
-        }
+        $barang = $jumlahBarang == 0 ? Barang::all() : Barang::take($jumlahBarang)->get();
 
         return view('partial', compact('barang'));
     }

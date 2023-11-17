@@ -116,7 +116,7 @@
     </div>
     
     {{-- Form validasi tombol delete barang --}}
-    <div class="bg-black fixed top-0 left-0 font-poppins opacity-0 hidden transition-opacity h-screen w-screen bg-opacity-50 justify-center items-center" id="delete-modal">
+    <div class="bg-black fixed top-0 left-0 font-poppins opacity-0 hidden transition-opacity h-screen w-screen bg-opacity-30 justify-center items-center" id="delete-modal">
         <div class=" bg-white rounded-md flex flex-col gap-3 justify-center items-center py-4 px-10">
             Apakah anda yakin ingin menghapus?
             <form id="delete-form" class="text-sm flex text-white gap-3" method="POST">
