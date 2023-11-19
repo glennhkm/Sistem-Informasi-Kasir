@@ -30,4 +30,17 @@ class AuthController extends Controller
                 ->withErrors(['error' => 'Username atau Password anda tidak sesuai!']);
         }
     }
+
+   
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect('/login');
+    }
+    
 }

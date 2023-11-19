@@ -4,6 +4,8 @@ use App\Models\Barang;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\TransaksiController;
+use App\Models\Transaksi;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +18,17 @@ use App\Http\Controllers\BarangController;
 |
 */
 
-
-
-Route::view('/', 'welcome')->middleware('auth');
-// Route::get('/', [BarangController::class,'index']);
 Route::get('/login', [AuthController::class,'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class,'authenticate']);
+Route::resource('/barang', BarangController::class)->middleware('auth');
+Route::get('/update-jumlah-barang', [BarangController::class, 'updateJumlahBarang']);
+Route::get('/', [TransaksiController::class, 'halamanMain'])->middleware('auth')->name('home');
+Route::get('/search-barang', [BarangController::class, 'search'])->name('search.barang');
+Route::post('/transaksi', [TransaksiController::class, 'storeTransaksi']);
+Route::get('/transaksi', [TransaksiController::class, 'halamanTransaksi'])->middleware('auth');
+// Route::get('/transaksi/filter', [TransaksiController::class, 'filterTransaksi'])->middleware('auth')->name('transaksi.filter');
+// Route::get('/urutkan-berdasarkan', [TransaksiController::class, 'urutkanBerdasarkan'])->name('urutkan.berdasarkan');
+Route::get('/urutkan-berdasarkan', [TransaksiController::class, 'urutkanBerdasarkan'])->name('urutkan.berdasarkan')->middleware('auth');
+Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+Route::get('/bill', [TransaksiController::class, 'bill'])->middleware('auth');
+
