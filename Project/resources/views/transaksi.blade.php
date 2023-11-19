@@ -49,7 +49,7 @@
 
     {{-- Start Tabel Transaksi --}}
     <div class=" w-[94.8%] h-[53vh] ml-[2.1vw] mt-[3.8vh] font-poppins overflow-scroll" id="printArea">
-        <table class=" w-full text-[2vh] text-center">
+        <table class=" w-full text-[2vh] text-center" id="fullTable">
             <thead id="tableHead" class="bg-[#C02126] text-white sticky top-[0px] font-semibold">
                 <tr class="h-[5vh]">
                     <td class="border-[0.1vh] border-black">No</td>
@@ -57,7 +57,7 @@
                     <td class="border-[0.1vh] border-black">ID Barang</td>
                     <td class="border-[0.1vh] border-black">Nama Barang</td>
                     <td class="border-[0.1vh] border-black">Qty</td>
-                    <td class="border-[0.1vh] border-black"><h1>Harga</h1><p class=" text-[1vh]">(harga-(harga * dics))+(harga diskon * pajak)</p></td>
+                    <td class="border-[0.1vh] border-black"><h1>Harga</h1><p class=" text-[1vh]" id="hargaHeadRow">(harga-(harga * dics))+(harga diskon * pajak)</p></td>
                     <td class="border-[0.1vh] border-black">Tanggal</td>
                 </tr>
             </thead>
@@ -117,11 +117,23 @@
     function printTransaksi(){
         var original = document.body.innerHTML;
         var tableHead = document.getElementById('tableHead');
+        var fullTable = document.getElementById('fullTable');
+        var hargaHeadRow = document.getElementById('hargaHeadRow');
+        const emptyRows = document.querySelectorAll('#emptyRow');
         var jumlah = jumlahBarang;
         var rangeWaktu = waktu;
         var tambahanKalimat = ' hari terakhir sampai';
 
+        emptyRows.forEach(row => {
+          row.remove(); 
+        });
 
+        hargaHeadRow.classList.add('text-[0.7vh]');
+        hargaHeadRow.classList.remove('text-[1vh]');
+
+        fullTable.classList.add('text-[1.3vh]');  
+        fullTable.classList.remove('text-[2vh]');  
+        
         tableHead.classList.add('bg-red-700');  
         tableHead.classList.remove('bg-[#C02126]');  
         
