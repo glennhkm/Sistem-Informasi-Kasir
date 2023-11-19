@@ -11,7 +11,7 @@
 </tr>
 @endforeach
 @for ($i = count($transaksi); $i < 20; $i++)
-<tr class="h-[4.5vh]">
+<tr class="h-[4.5vh]" id="emptyRow">
     <td class="border-[0.1vh] border-black"></td>
     <td class="border-[0.1vh] border-black"></td>
     <td class="border-[0.1vh] border-black"></td>
