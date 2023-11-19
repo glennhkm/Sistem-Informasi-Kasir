@@ -18,8 +18,6 @@ use App\Models\Transaksi;
 |
 */
 
-
-
 Route::get('/login', [AuthController::class,'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class,'authenticate']);
 Route::resource('/barang', BarangController::class)->middleware('auth');
@@ -33,3 +31,4 @@ Route::get('/transaksi', [TransaksiController::class, 'halamanTransaksi'])->midd
 Route::get('/urutkan-berdasarkan', [TransaksiController::class, 'urutkanBerdasarkan'])->name('urutkan.berdasarkan')->middleware('auth');
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 Route::get('/bill', [TransaksiController::class, 'bill'])->middleware('auth');
+

@@ -30,6 +30,7 @@ class AuthController extends Controller
                 ->withErrors(['error' => 'Username atau Password anda tidak sesuai!']);
         }
     }
+
    
     public function logout(Request $request): RedirectResponse
     {
