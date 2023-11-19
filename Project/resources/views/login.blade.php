@@ -10,32 +10,32 @@
 </head>
 <body>
     
-    <div class="flex flex-col items-center justify-center h-screen w-full bg-[#1E1E1E]">
-            <div class="flex flex-col justify-center w-1/4  pb-10 rounded-xl font-poppins bg-white text-white">
-                <div class="justify-center bg-red-800 rounded-t-[11px] py-6">
-                    <h2 class="text-center text-2xl font-bold tracking-wider ">LOGIN</h2>
+    <div class="flex flex-col items-center justify-center h-screen w-screen bg-[#1E1E1E]">
+            <div class="flex flex-col justify-center w-[25vw]  pb-[5vh] rounded-[1.4vh] font-poppins bg-white text-white">
+                <div class="justify-center bg-red-800 rounded-t-[1.4vh] py-[3vh]">
+                    <h2 class="text-center text-[3vh] font-bold tracking-[0.2vw] ">LOGIN</h2>
                 </div>
                 
-                <div class="mt-[1.8rem] mx-8">
-                    <form class="space-y-6" action="" method="POST">
+                <div class="mt-[3vh] mx-[2.4vw]">
+                    <form class="space-y-[3.8vh]" action="" method="POST">
                         @csrf
                         <div>
-                            <label for="Username" class="block text-sm font-medium leading-6 text-gray-900"></label>
-                            <div class="mt-2 px-2 border-b-2 border-black">
-                                <img src="\assets\img\username.png" alt="" class=" inline-block w-[15px] mr-1 mb-1">
-                                <input id="username" name="username" placeholder="Username" type="username" autocomplete="off" required required oninvalid="this.setCustomValidity('Username tidak boleh kosong!')" oninput="this.setCustomValidity('')"  class=" inline-block w-[80%] py-1 text-gray-900  focus:outline-none sm:text-sm sm:leading-6" value="{{ old('username') }}">
+                            {{-- <label for="Username" class="block text-sm font-medium leading-6 text-gray-900"></label> --}}
+                            <div class=" px-[0.5vw] border-b-[0.3vh] border-black">
+                                <img src="\assets\img\username.png" alt="" class=" inline-block w-[1vw] mr-[0.5vw] mb-[0.4vh]">
+                                <input id="username" name="username" placeholder="Username" type="username" autocomplete="off" required required oninvalid="this.setCustomValidity('Username tidak boleh kosong!')" oninput="this.setCustomValidity('')"  class=" inline-block w-[80%] py-[0.5vh] text-gray-900  focus:outline-none text-[1.8vh]" value="{{ old('username') }}">
                             </div>
                         </div>
                         
                         <div>
-                            <div class="flex items-center justify-between">
+                            {{-- <div class="flex items-center justify-between">
                                 <label for="password" class="block text-sm font-medium leading-6 text-gray-900"></label>
-                            </div>
-                            <div class=" flex gap-[9.5px] mt-2 pl-2 pr-[0.4rem] py-1 border-b-2 border-black">
-                                <img src="\assets\img\password.png" alt="" class="w-4 h-5">
-                                <input id="password" placeholder="Password" name="password" type="password" autocomplete="off" required oninvalid="this.setCustomValidity('Password tidak boleh kosong!')" oninput="this.setCustomValidity('')" class="w-full text-gray-900 border-black focus:outline-none sm:text-sm sm:leading-6" value="{{ old('password') }}">                                  
-                                <button type="button" id="togglePassword">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mt-0.5 text-black hover:text-red-800" id="eye-icon">
+                            </div> --}}
+                            <div class=" flex pl-[0.5vw] pr-[0.4rem] py-[0.5vh] border-b-[0.3vh] border-black">
+                                <img src="\assets\img\password.png" alt="" class="w-[1.2vw] h-[2.5vh] mr-[0.8vw]">
+                                <input id="password" placeholder="Password" name="password" type="password" autocomplete="off" required oninvalid="this.setCustomValidity('Password tidak boleh kosong!')" oninput="this.setCustomValidity('')" class="w-full text-gray-900 focus:outline-none text-[1.8vh] " value="{{ old('password') }}">                                  
+                                <button type="button" id="togglePassword" class=" w-[1.7vw] h-[3vh]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-[1.7vw] h-[3vh] mr-[0vh] text-black hover:text-red-800" id="eye-icon">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
@@ -57,7 +57,7 @@
                         @endif
                         
                         <div>
-                            <button type="submit" class="flex px-5 py-2 rounded-md bg-red-800 mx-auto mt-14 text-sm font-semibold leading-6 text-white shadow-sm hover:scale-[1.2] duration-[0.4s] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Login</button>
+                            <button type="submit" class="flex w-[8.2vw] h-[4.9vh] px-[2.7vw] py-[1vh] rounded-[0.7vh] bg-red-800 mx-auto mt-[7vh] text-[1.9vh] font-semibold text-white shadow-sm hover:scale-[1.1] duration-[0.4s] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Login</button>
                         </div>
                     </form>
                     

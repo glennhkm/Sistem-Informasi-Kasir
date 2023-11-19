@@ -72,15 +72,15 @@
             </div>
             <div class="text-xs flex flex-col w-4/5 gap-2">
                 <label for="harga" class="text-sm ml-1">Harga barang</label>
-                <input type="number" required autocomplete="off" oninvalid="this.setCustomValidity('Harga tidak boleh kosong!')" oninput="this.setCustomValidity('')"  name="harga" id="harga" class=" rounded-md bg-[#D9D9D9] font-normal text-xs py-3  px-2">
+                <input type="number" min="0" required autocomplete="off" oninvalid="this.setCustomValidity('Harga tidak boleh kosong!')" oninput="this.setCustomValidity('')"  name="harga" id="harga" class=" rounded-md bg-[#D9D9D9] font-normal text-xs py-3  px-2">
             </div>
             <div class="text-xs flex flex-col w-4/5 gap-2">
                 <label for="harga" class="text-sm ml-1">Stok</label>
-                <input type="number" required autocomplete="off" oninvalid="this.setCustomValidity('Stok tidak boleh kosong!')" oninput="this.setCustomValidity('')"  name="stok" id="stok" class=" rounded-md bg-[#D9D9D9] font-normal text-xs py-3  px-2">
+                <input type="number" min="0" required autocomplete="off" oninvalid="this.setCustomValidity('Stok tidak boleh kosong!')" oninput="this.setCustomValidity('')"  name="stok" id="stok" class=" rounded-md bg-[#D9D9D9] font-normal text-xs py-3  px-2">
             </div>
             <div class="text-xs flex flex-col w-4/5 gap-2">
                 <label for="harga" class="text-sm ml-1">Diskon</label>
-                <input type="number" autocomplete="off"  name="diskon" id="diskon" class=" rounded-md bg-[#D9D9D9] font-normal text-xs py-3  px-2">
+                <input type="number" min="0" autocomplete="off"  name="diskon" id="diskon" class=" rounded-md bg-[#D9D9D9] font-normal text-xs py-3  px-2">
             </div>
             <button type="submit" class="bg-[#C16F1D] text-white font-semibold rounded-md w-32 py-2 text-sm px-4 hover:scale-110 duration-300 mt-4">Save</button>
         </form>
@@ -101,15 +101,15 @@
                 </div>
                 <div class="text-xs flex flex-col w-4/5 gap-2">
                     <label for="harga" class="text-sm ml-1">Harga barang</label>
-                    <input type="number" autocomplete="off" oninvalid="this.setCustomValidity('Harga tidak boleh kosong!')" oninput="this.setCustomValidity('')"  name="harga" id="harga_edit" class=" rounded-md bg-[#D9D9D9] font-normal text-xs py-3  px-2">
+                    <input type="number" min="0" autocomplete="off" oninvalid="this.setCustomValidity('Harga tidak boleh kosong!')" oninput="this.setCustomValidity('')"  name="harga" id="harga_edit" class=" rounded-md bg-[#D9D9D9] font-normal text-xs py-3  px-2">
                 </div>
                 <div class="text-xs flex flex-col w-4/5 gap-2">
                     <label for="harga" class="text-sm ml-1">Stok</label>
-                    <input type="number" autocomplete="off" oninvalid="this.setCustomValidity('Stok tidak boleh kosong!')" oninput="this.setCustomValidity('')"  name="stok" id="stok_edit" class=" rounded-md bg-[#D9D9D9] font-normal text-xs py-3  px-2">
+                    <input type="number" min="0" autocomplete="off" oninvalid="this.setCustomValidity('Stok tidak boleh kosong!')" oninput="this.setCustomValidity('')"  name="stok" id="stok_edit" class=" rounded-md bg-[#D9D9D9] font-normal text-xs py-3  px-2">
                 </div>
                 <div class="text-xs flex flex-col w-4/5 gap-2">
                     <label for="harga" class="text-sm ml-1">Diskon</label>
-                    <input type="number" autocomplete="off"  name="diskon" id="diskon_edit" class=" rounded-md bg-[#D9D9D9] font-normal text-xs py-3  px-2">
+                    <input type="number" min="0" autocomplete="off"  name="diskon" id="diskon_edit" class=" rounded-md bg-[#D9D9D9] font-normal text-xs py-3  px-2">
                 </div>
                 <button onclick="confirmForm('edit-form')" type="submit" class=" bg-[#C16F1D] text-white font-semibold rounded-md w-32 py-2 text-sm px-4 hover:scale-110 duration-300 mt-4">Save</button>
         </form>

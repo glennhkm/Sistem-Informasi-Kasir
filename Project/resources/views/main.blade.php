@@ -124,13 +124,17 @@
         {{-- End of Footer --}}
     </div>
     
-    <div id="berhasilBayar" class="bg-black bg-opacity-30 opacity-0 transition-opacity duration-400 hidden fixed top-0 left-0 w-screen h-screen items-center justify-center font-poppins">
-        <div class="w-auto h-auto bg-white rounded-md flex flex-col gap-7 p-12 ">
+    <div id="berhasilBayar" class="bg-black bg-opacity-30 transition-opacity hidden opacity-0 duration-400 fixed top-0 left-0 w-screen h-screen items-center justify-center font-poppins">
+        <div class="w-auto h-auto bg-white rounded-md flex flex-col gap-7 px-12 py-7 relative justify-center items-center ">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="rgb(125, 27, 27)" class="w-5 h-5 m-auto hover:p-[0.2rem] hover:bg-red-800 transition-fill hover:fill-white duration-300 rounded-full absolute top-1 right-1 cursor-pointer" onclick="hideModal('berhasilBayar')" id="tombolX" >
+                <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+              </svg>                                       
             <svg xmlns="http://www.w3.org/2000/svg" height="7em" class="" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" fill="rgb(22, 163, 74)"/></svg>
             <p class="text-center font-bold tracking-wide text-xl text-green-600">Pembayaran berhasil!</p>
+            <a href="/./bill" target="_blank"><button id="cetakBill" class="bg-white text-green-600 shadow-lg border-green-600 border py-1 font-semibold w-24 rounded-md text-sm -mt-2 hover:text-white hover:bg-green-600 duration-300" >Cetak bill</button></a>
         </div>
     </div>
-
+    
     @if(session('status'))
     <div class="bg-black bg-opacity-30 fixed top-0 left-0 hidden duration-300 opacity-0 h-screen w-screen justify-center font-poppins" id="udahLoginModal">
         <div class="text-black font-bold tracking-wide text-2xl bg-white h-32 px-16 gap-3 rounded-md transition-transform duration-700 ease-out transform flex flex-col items-center justify-center" id="udahLoginForm">
@@ -140,6 +144,10 @@
             </button>
         </div>
     </div>
+    
+    <div id="invoiceContainer" class="bg-black text-white ">
+        
+    </div>
     @endif
     
     <script>
@@ -148,6 +156,8 @@
         const cartTable = document.getElementById('cartTable');
         const cartBody = document.getElementById('cartBody');
         const tombolBayar = document.getElementById('bayar');
+        const cetakBill = document.getElementById('cetakBill');
+        const tombolX = document.getElementById('tombolX');
         
         searchResults.classList.add('hidden');
         
@@ -165,20 +175,21 @@
                 let qtyAwal = item.qty;
                 item.qty++;
                 item.sub_total = (item.sub_total / qtyAwal) * item.qty
-            } else {
-                counter++;
-    cart.push({
-     iteration: counter,  
-     id: barang.id,
-     nama_barang: ucwords(barang.nama_barang),
-     qty: qty,
-     harga: barang.harga,
-     diskon: barang.diskon*1,
-     sub_total: barang.harga - (barang.harga*(barang.diskon/100)) * qty,
-     stok: barang.stok,
-     isEditMode: false
-    });
-}
+            } 
+            else {
+                counter = cart.length + 1;
+                cart.push({
+                    iteration: counter,  
+                    id: barang.id,
+                    nama_barang: ucwords(barang.nama_barang),
+                    qty: qty,
+                    harga: barang.harga,
+                    diskon: barang.diskon*1,
+                    sub_total: barang.harga - (barang.harga*(barang.diskon/100)) * qty,
+                    stok: barang.stok,
+                    isEditMode: false
+                });
+            }
 
 renderCart();
 
@@ -187,6 +198,9 @@ renderCart();
 function removeFromCart(id) {
 
 cart = cart.filter(item => item.id != id);
+cart.forEach((item, index) => {
+    item.iteration = index + 1; 
+  });
 
 renderCart();
 
@@ -307,20 +321,20 @@ cart.forEach((item, index) => {
         actionTd = document.createElement('td');
         actionTd.classList.add('border-[0.1vh]', 'border-black');
         actionTd.innerHTML = `  <div class=" flex gap-[0.7vw] justify-center text-[1.5vh]">
-                                                            <button data-id="${item.id}" class="bg-[#C16F1D] text-white w-[4vw] h-[3.1vh] py-auto rounded-[0.7vh] hover:scale-110 duration-300 edit-btn1">Simpan</button>
-                                                            <button onclick="selectedId(${item.id})" class=" bg-red-800 text-white w-[4vw] h-[3.1vh] py-auto rounded-[0.7vh] hover:scale-110 duration-300">Hapus</button>
-                                                        </div>
-                                                        <div id="hapusButton" class="bg-black fixed top-0 left-0 font-poppins opacity-0 hidden transition-opacity h-screen w-screen bg-opacity-50 justify-center items-center">
-                                                            <div class=" bg-white rounded-md flex flex-col gap-3 justify-center items-center py-4 px-10">
+            <button data-id="${item.id}" class="bg-[#C16F1D] text-white w-[4vw] h-[3.1vh] py-auto rounded-[0.7vh] hover:scale-110 duration-300 edit-btn1">Simpan</button>
+            <button onclick="selectedId(${item.id})" class=" bg-red-800 text-white w-[4vw] h-[3.1vh] py-auto rounded-[0.7vh] hover:scale-110 duration-300">Hapus</button>
+            </div>
+            <div id="hapusButton" class="bg-black fixed top-0 left-0 font-poppins opacity-0 hidden transition-opacity h-screen w-screen bg-opacity-50 justify-center items-center">
+                <div class=" bg-white rounded-md flex flex-col gap-3 justify-center items-center py-4 px-10">
                                                                 Apakah anda yakin ingin menghapus?
                                                                 <div class="text-white text-sm flex gap-3 ">
                                                                     <button id="tombolYa" class=" bg-blue-600 w-20 rounded-md hover:scale-110 duration-300 hapus-btn">Ya</button>
                                                                     <button onclick="hideModal('hapusButton')" class=" bg-red-800 w-20 rounded-md py-1 hover:scale-110 duration-300">Tidak</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>`;
-                            }
-                            else{
+                                                                    </div>
+                                                                    </div>
+                                                                    </div>`;
+                                                                }
+                                                                else{
                                 actionTd = document.createElement('td');
                                 actionTd.classList.add('border-[0.1vh]', 'border-black');
                                 actionTd.innerHTML = `  <div class=" flex gap-[0.7vw] justify-center text-[1.5vh]">
@@ -333,43 +347,43 @@ cart.forEach((item, index) => {
                                                                 <div class="text-white text-sm flex gap-3 ">
                                                                     <button id="tombolYa" class=" bg-blue-600 w-20 rounded-md hover:scale-110 duration-300 hapus-btn">Ya</button>
                                                                     <button onclick="hideModal('hapusButton')" class=" bg-red-800 w-20 rounded-md py-1 hover:scale-110 duration-300">Tidak</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>`;
-                                            }
-                                            
-                                            // {{-- ="${item.id} --}}
-                                // Masukkan elemen-elemen td ke dalam baris
-    tr.appendChild(iterationTd);
-    tr.appendChild(idTd);
-    tr.appendChild(namaTd);
-    tr.appendChild(qtyTd);
-    tr.appendChild(hargaTd);
-    tr.appendChild(diskonTd);
-    tr.appendChild(sub_totalTd);
-    tr.appendChild(actionTd);
-                                
-                                // Masukkan baris ke dalam cartBody
-    cartBody.appendChild(tr);
-     
-     //Memberikan nilai jumlah total harga semua barang juga jumlah sub total semua harga sebelum diberikan pajak 
-     sumSubTotal += item.sub_total;   
-     sumTotal += item.sub_total + (item.sub_total * 0.1);   
- });
+                                                                    </div>
+                                                                    </div>
+                                                                    </div>`;
+                                                                }
+                                                                
+                                                                // {{-- ="${item.id} --}}
+                                                                // Masukkan elemen-elemen td ke dalam baris
+                                                                tr.appendChild(iterationTd);
+                                                                tr.appendChild(idTd);
+                                                                tr.appendChild(namaTd);
+                                                                tr.appendChild(qtyTd);
+                                                                tr.appendChild(hargaTd);
+                                                                tr.appendChild(diskonTd);
+                                                                tr.appendChild(sub_totalTd);
+                                                                tr.appendChild(actionTd);
+                                                                
+                                                                // Masukkan baris ke dalam cartBody
+                                                                cartBody.appendChild(tr);
+                                                                
+                                                                //Memberikan nilai jumlah total harga semua barang juga jumlah sub total semua harga sebelum diberikan pajak 
+                                                                sumSubTotal += item.sub_total;   
+                                                                sumTotal += item.sub_total + (item.sub_total * 0.1);   
+                                                            });
  document.getElementById('jumlahSubTotal').innerHTML ='Rp ' + sumSubTotal.toLocaleString('id-ID');
  document.getElementById('jumlahTotal1').innerHTML ='Rp ' + sumTotal.toLocaleString('id-ID');
  document.getElementById('jumlahTotal2').innerHTML ='Rp ' + sumTotal.toLocaleString('id-ID');
-                     
+ 
  for (let i = cart.length; i < 20; i++) {
-   const emptyRow = document.createElement('tr');
-    emptyRow.classList.add('h-[5vh]')
-   emptyRow.innerHTML = `
-   <td class="border-[0.1vh] border-black w-[3.3vw]"></td>
-   <td class="border-[0.1vh] border-black w-[7vw]"></td>
-   <td class="border-[0.1vh] border-black w-[14vw]"></td>
-   <td class="border-[0.1vh] border-black w-[4vw]"></td>
-   <td class="border-[0.1vh] border-black w-[10vw]"></td>
-   <td class="border-[0.1vh] border-black w-[5vw]"></td>
+     const emptyRow = document.createElement('tr');
+     emptyRow.classList.add('h-[5vh]')
+     emptyRow.innerHTML = `
+     <td class="border-[0.1vh] border-black w-[3.3vw]"></td>
+     <td class="border-[0.1vh] border-black w-[7vw]"></td>
+     <td class="border-[0.1vh] border-black w-[14vw]"></td>
+     <td class="border-[0.1vh] border-black w-[4vw]"></td>
+     <td class="border-[0.1vh] border-black w-[10vw]"></td>
+     <td class="border-[0.1vh] border-black w-[5vw]"></td>
    <td class="border-[0.1vh] border-black w-[10vw]"></td>
    <td class="border-[0.1vh] border-black w-[12vw]"></td>
    `;
@@ -438,159 +452,153 @@ if(e.target.classList.contains('edit-btn1')) {
  document.getElementById('berhasilAlert').classList.add('opacity-100');
  setTimeout(function() {
      document.getElementById('berhasilAlert').classList.remove('opacity-100');
- }, 2000);
+    }, 2000);
 }
 }); 
 
 
 function debounce(func, delay) {
-let timeoutId;
-return function () {
- const context = this;
- const args = arguments;
- clearTimeout(timeoutId);
- timeoutId = setTimeout(() => {
-     func.apply(context, args);
- }, delay);
-};
+    let timeoutId;
+    return function () {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            func.apply(context, args);
+        }, delay);
+    };
 }
 
 // Search Barang
 const search = debounce(async keyword => {
-
-// Hide results
-searchResults.style.display = 'none';
-
-// Abort if empty
-if(!keyword) return;
-
-// Call API
-const response = await fetch(`/search-barang?keyword=${keyword}`);
-const data = await response.json();
-
-// Show & render results
-searchResults.style.display = 'block';
-renderResults(data);
-
+    
+    // Hide results
+    searchResults.style.display = 'none';
+    
+    // Abort if empty
+    if(!keyword) return;
+    
+    // Call API
+    const response = await fetch(`/search-barang?keyword=${keyword}`);
+    const data = await response.json();
+    
+    // Show & render results
+    searchResults.style.display = 'block';
+    renderResults(data);
+    
 }, 500);
 
 
 function ucwords(str) {
-return str.replace(/\b\w/g, function (match) {
- return match.toUpperCase();
-});
+    return str.replace(/\b\w/g, function (match) {
+        return match.toUpperCase();
+    });
 }
 
 // Render results 
 function renderResults(barangs) {
-
-searchResults.innerHTML = '';
-
-barangs.forEach((barang, index) => {
- 
-    const li = document.createElement('li');
-    li.innerText = ucwords(barang.nama_barang);
     
-    li.classList.add('w-full','py-3', 'pl-4', 'hover:bg-[#D9D9D9]', 'hover:scale-[1.01]', 'duration-300', 'cursor-pointer', 'relative', 'z-[1000]', 'bg-white');
+    searchResults.innerHTML = '';
     
-    if(index < barangs.length - 1){
-        li.classList.add('border-b-2', 'border-black');
-    }
-    else{
-        li.classList.add('rounded-b-md');
-    }
-
-    li.addEventListener('click', () => {
-        selectBarang(barang);
+    barangs.forEach((barang, index) => {
+        
+        const li = document.createElement('li');
+        li.innerText = ucwords(barang.nama_barang);
+        
+        li.classList.add('w-full','py-3', 'pl-4', 'hover:bg-[#D9D9D9]', 'hover:scale-[1.01]', 'duration-300', 'cursor-pointer', 'relative', 'z-[1000]', 'bg-white');
+        
+        if(index < barangs.length - 1){
+            li.classList.add('border-b-2', 'border-black');
+        }
+        else{
+            li.classList.add('rounded-b-md');
+        }
+        
+        li.addEventListener('click', () => {
+            selectBarang(barang);
+        });
+        
+        searchResults.appendChild(li);
+        
     });
-
-    searchResults.appendChild(li);
- 
-});
-
+    
 }
 
 // Select barang 
 function selectBarang(barang) {
-
-// Add to cart  
-addToCart(barang);
-
-// Reset input
-searchInput.value = '';
-
-// Hide results
-searchResults.style.display = 'none';
-
+    
+    // Add to cart  
+    addToCart(barang);
+    
+    // Reset input
+    searchInput.value = '';
+    
+    // Hide results
+    searchResults.style.display = 'none';
+    
 }
 
 // Event listener
 searchInput.addEventListener('input', e => {
-search(e.target.value); 
+    search(e.target.value); 
 });
 
 const SAVE_URL = "/transaksi";
 
 // Event handler 
 tombolBayar.addEventListener('click', function() {
-if(cart.length < 1){
- document.getElementById('berhasilAlert').innerHTML = `Pilih barang terlebih dahulu` ;
- document.getElementById('berhasilAlert').classList.add('opacity-100', 'bg-red-600', 'border-red-600', 'text-red-600');
- setTimeout(function() {
-     document.getElementById('berhasilAlert').classList.remove('opacity-100');
- }, 2000);
- setTimeout(function() {
-     document.getElementById('berhasilAlert').classList.remove('border-red-600', 'text-red-600', 'bg-red-600');
- }, 2500);
-}
-else{
- document.getElementById('berhasilBayar').classList.remove('hidden');
- document.getElementById('berhasilBayar').classList.add('flex');
- setTimeout(() => {
-     document.getElementById('berhasilBayar').classList.add('opacity-100');
-     
- }, 200);
- setTimeout(() => {
-     document.getElementById('berhasilBayar').classList.remove('opacity-100');
-     setTimeout(() => {
-         document.getElementById('berhasilBayar').classList.remove('flex');
-         document.getElementById('berhasilBayar').classList.add('hidden');
-     }, 500);
-     
- }, 2300);
+    if(cart.length < 1){
+        document.getElementById('berhasilAlert').innerHTML = `Pilih barang terlebih dahulu` ;
+        document.getElementById('berhasilAlert').classList.add('opacity-100', 'bg-red-600', 'border-red-600', 'text-red-600');
+        setTimeout(function() {
+            document.getElementById('berhasilAlert').classList.remove('opacity-100');
+        }, 2000);
+        setTimeout(function() {
+            document.getElementById('berhasilAlert').classList.remove('border-red-600', 'text-red-600', 'bg-red-600');
+        }, 2500);
+    }
+    else{
+        document.getElementById('berhasilBayar').classList.remove('hidden');
+        document.getElementById('berhasilBayar').classList.add('flex');
+        setTimeout(() => {
+            document.getElementById('berhasilBayar').classList.add('opacity-100');
+            
+        }, 200);
+                
+                const data = cart.map(item => {
+                    return {
+                        id_barang: item.id,
+                        nama_barang: item.nama_barang,
+                        jumlah_barang: item.qty,
+                        sub_total: item.sub_total,
+                        harga_total: item.sub_total + (item.sub_total * 0.1),
+                        pajak: 0.1
+                    };
+                });
+                
+                axios.post('/transaksi', data)
+                .then(response => {
+                    tombolX.addEventListener('click', function(){
+                        setTimeout(() => {
+                            location.reload(true);
+                        }, 100);
+                    });
+                    })
+                    .catch(error => {
+                        // Handle error if the request fails
+                        console.error('Error:', error);
+                        alert('Terjadi kesalahan saat menyimpan transaksi.');
+                    });
+                }
+                
+            });
+            
+            document.getElementById('udahLoginModal').classList.remove('hidden');
+            document.getElementById('udahLoginModal').classList.add('flex');
+            setTimeout(function () {
+                document.getElementById('udahLoginForm').classList.add('translate-y-20');
+                document.getElementById('udahLoginModal').classList.add('opacity-100');
+            }, 50);
 
- const data = cart.map(item => {
-   return {
-     id_barang: item.id,
-     nama_barang: item.nama_barang,
-     jumlah_barang: item.qty,
-     sub_total: item.sub_total,
-     harga_total: item.sub_total + (item.sub_total * 0.1),
-     pajak: 0.1
-   };
- });
-
- axios.post('/transaksi', data)
-   .then(response => {
-       setTimeout(() => {
-           location.reload(true);
-       }, 2300);
-   })
-   .catch(error => {
-       // Handle error if the request fails
-       console.error('Error:', error);
-       alert('Terjadi kesalahan saat menyimpan transaksi.');
-   });
-}
-
-
-});
-
-document.getElementById('udahLoginModal').classList.remove('hidden');
-document.getElementById('udahLoginModal').classList.add('flex');
-setTimeout(function () {
-    document.getElementById('udahLoginForm').classList.add('translate-y-20');
-    document.getElementById('udahLoginModal').classList.add('opacity-100');
-     }, 50);
     </script>
 @endsection

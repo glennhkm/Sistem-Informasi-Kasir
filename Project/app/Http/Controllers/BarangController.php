@@ -11,7 +11,7 @@ use function Laravel\Prompts\table;
 class BarangController extends Controller
 {
     public function index()
-    {
+    {   
         $barang = Barang::all();
         return view('barang', compact('barang'));
     }

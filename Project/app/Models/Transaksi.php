@@ -22,15 +22,15 @@ class Transaksi extends Model
         'harga_total',
     ];
     
-    public function getCreatedAtAttribute($value)
-    {
-        return Carbon::parse($value)->translatedFormat('l, d F Y H:i:s');
-    }
+    // public function getCreatedAtAttribute($value)
+    // {
+    //     return Carbon::parse($value)->translatedFormat('l, d F Y H:i:s');
+    // }
 
-    public function getUpdatedAtAttribute($value)
-    {
-        return Carbon::parse($value)->translatedFormat('l, d F Y H:i:s');
-    }
+    // public function getUpdatedAtAttribute($value)
+    // {
+    //     return Carbon::parse($value)->translatedFormat('l, d F Y H:i:s');
+    // }
 
     // public function getSubTotalAttribute(){
         
@@ -39,10 +39,10 @@ class Transaksi extends Model
     //     return $sub_total;
     // }
 
-    // public function totalSubTotal() 
-    // {
-    //   return $this->get()->sum('sub_total');
-    // }
+    public function totalSubTotal() 
+    {
+      return $this->get()->sum('sub_total');
+    }
 
     public function barang()
     {

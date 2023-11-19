@@ -9,7 +9,7 @@
         <title>@yield('title')</title>
         <link rel="icon" href="{{ url('assets/img/horemart.png')}}" type="image/icon">
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <div class="h-[12vh] w-screen bg-[#272320] border-solid border-b-[0.8vh] border-[#C02126] font-poppins clear-right box-border">
+    <div class="h-[12vh] w-screen bg-[#272320] border-solid border-b-[0.8vh] border-[#C02126] font-poppins clear-right box-border">
 
         <p class="text-[4vh] font-bold text-[#C02126] pt-[2.7vh] pl-[2.1vw] inline-block box-border ">HORE<span class="text-[#C16F1D]">MART</span></p>
 
@@ -22,7 +22,7 @@
 
             <div class=" inline-block border-solid border-r-[0.5vh] border-[#FCF9F9] pr-[1vw] box-border float-right">
                 <p class=" text-[1.4vh] pb-[0.8vh]">Tanggal : </p>
-                <p class=" text-[2.3vh] uppercase"> {{\Carbon\Carbon::now()->format('j F Y')}} </p>
+                <p class=" text-[2.3vh] uppercase" id="tanggalSekarang"> {{\Carbon\Carbon::now()->format('j F Y')}} </p>
             </div>
         </div>
     </div>
