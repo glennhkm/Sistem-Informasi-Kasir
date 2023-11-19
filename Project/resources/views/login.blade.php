@@ -24,10 +24,12 @@
                             <div class=" px-[0.5vw] border-b-[0.3vh] border-black">
                                 <img src="\assets\img\username.png" alt="" class=" inline-block w-[1vw] mr-[0.5vw] mb-[0.4vh]">
                                 <input id="username" name="username" placeholder="Username" type="username" autocomplete="off" required required oninvalid="this.setCustomValidity('Username tidak boleh kosong!')" oninput="this.setCustomValidity('')"  class=" inline-block w-[80%] py-[0.5vh] text-gray-900  focus:outline-none text-[1.8vh]" value="{{ old('username') }}">
+
                             </div>
                         </div>
                         
                         <div>
+
                             {{-- <div class="flex items-center justify-between">
                                 <label for="password" class="block text-sm font-medium leading-6 text-gray-900"></label>
                             </div> --}}
@@ -85,5 +87,6 @@
             }
         });
     </script>
+
 </body>
 </html>
